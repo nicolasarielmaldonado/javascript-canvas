@@ -3,12 +3,13 @@ export class InputHandler {
     this.game = game;
     this.keys = [];
     window.addEventListener("keydown", (e) => {
+      console.log(e.code);
       if (
         (e.code === "KeyS" ||
           e.code === "KeyW" ||
           e.code === "KeyA" ||
           e.code === "KeyD" ||
-          e.code === "Enter") &&
+          e.code === "Space") &&
         this.keys.indexOf(e.code) === -1
       ) {
         this.keys.push(e.code);
@@ -23,7 +24,7 @@ export class InputHandler {
         e.code === "KeyW" ||
         e.code === "KeyA" ||
         e.code === "KeyD" ||
-        e.code === "Enter"
+        e.code === "Space"
       ) {
         this.keys.splice(this.keys.indexOf(e.code), 1);
       }
