@@ -68,6 +68,12 @@ export class Player {
     }
   }
   draw(context) {
+    if (this.game.debug) {
+      context.save();
+      context.strokeStyle = "green";
+      context.strokeRect(this.x, this.y, this.width, this.height);
+      context.restore();
+    }
     context.drawImage(
       this.image,
       this.frameX * this.width,

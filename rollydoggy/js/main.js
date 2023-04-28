@@ -17,14 +17,15 @@ window.addEventListener("load", () => {
       this.width = width;
       this.height = height;
       this.gameSpeed = 0;
-      this.maxSpeed = 2;
+      this.maxSpeed = 3;
       this.groundMargin = 50;
       this.background = new Background(this);
       this.player = new Player(this);
-      this.input = new InputHandler();
+      this.input = new InputHandler(this);
       this.enemies = [];
       this.enemyTimer = 0;
       this.enemyInterval = 1000;
+      this.debug = true;
     }
 
     update(deltaTime) {
