@@ -15,6 +15,7 @@ class Layer {
     } else {
       this.x -= this.game.gameSpeed * this.speedModifier;
     }
+    this.x = Math.floor(this.x - this.game.gameSpeed);
   }
 
   draw(context) {
@@ -32,8 +33,8 @@ class Layer {
 export class Background {
   constructor(game) {
     this.game = game;
-    this.width = 1667;
-    this.height = 500;
+    this.width = 2400;
+    this.height = 720;
     this.layer5image = document.getElementById("layer5");
     this.layer4image = document.getElementById("layer4");
     this.layer3image = document.getElementById("layer3");

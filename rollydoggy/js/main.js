@@ -9,15 +9,15 @@ window.addEventListener("load", () => {
   loading.style.display = "none";
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = 500;
-  canvas.height = 500;
+  canvas.width = 1200;
+  canvas.height = 720;
 
   class Game {
     constructor(width, height) {
       this.width = width;
       this.height = height;
       this.gameSpeed = 0;
-      this.maxSpeed = 3;
+      this.maxSpeed = 2;
       this.groundMargin = 50;
       this.background = new Background(this);
       this.player = new Player(this);
@@ -52,6 +52,11 @@ window.addEventListener("load", () => {
       });
     }
     addEnemies() {
+      if (this.gameSpeed > 0 && Math.random() < 0.5) {
+        this.enemies.push(new GroundEnemy(this));
+      } else if (this.gameSpeed > 0) {
+        this.enemies.push(new ClimbingEnemy(this));
+      }
       this.enemies.push(new FlyingEnemy(this));
     }
   }
