@@ -1,5 +1,5 @@
 class Layer {
-  constructor(game, width, height, speedModifier, image) {
+  constructor(game, width, height, speedModifier, image, topMargin = 0) {
     this.game = game;
     this.width = width;
     this.height = height;
@@ -7,23 +7,29 @@ class Layer {
     this.image = image;
     this.x = 0;
     this.y = 0;
+    this.topMargin = topMargin;
   }
 
   update() {
-    if (this.x < -this.width) {
+    if (this.x <= -this.width) {
       this.x = 0;
     } else {
-      this.x -= this.game.gameSpeed * this.speedModifier;
+      this.x -= Math.floor(this.game.gameSpeed * this.speedModifier);
     }
-    this.x = Math.floor(this.x - this.game.gameSpeed);
   }
 
   draw(context) {
-    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    context.drawImage(
+      this.image,
+      this.x,
+      this.y + this.topMargin,
+      this.width,
+      this.height
+    );
     context.drawImage(
       this.image,
       this.x + this.width,
-      this.y,
+      this.y + this.topMargin,
       this.width,
       this.height
     );
@@ -68,7 +74,14 @@ export class Background {
       0.7,
       this.layer4image
     );
-    this.ground = new Layer(game, this.width, this.height, 1, this.layer5image);
+    this.ground = new Layer(
+      game,
+      this.width,
+      this.height,
+      1,
+      this.layer5image,
+      40
+    );
     this.backgroundLayers = [
       this.backdrop,
       this.backgroundBuildings,
