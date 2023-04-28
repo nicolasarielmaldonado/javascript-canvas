@@ -11,6 +11,9 @@ export class Player {
     this.frameX = 0;
     this.frameY = 0;
     this.maxFrame = 5;
+    this.fps = 30;
+    this.frameInterval = 1000 / this.fps;
+    this.frameTimer = 0;
     this.vy = 0;
     this.speed = 0;
     this.maxSpeed = 10;
@@ -24,7 +27,7 @@ export class Player {
     this.currentState = this.states[0];
     this.currentState.enter();
   }
-  update(input) {
+  update(input, deltaTime) {
     this.currentState.handleInput(input);
     // hor movement
     this.x += this.speed;
@@ -53,10 +56,15 @@ export class Player {
     }
 
     //spriteanim
-    if (this.frameX < this.maxFrame) {
-      this.frameX++;
+    if (this.frameTimer > this.frameInterval) {
+      this.frameTimer = 0;
+      if (this.frameX < this.maxFrame) {
+        this.frameX++;
+      } else {
+        this.frameX = 0;
+      }
     } else {
-      this.frameX = 0;
+      this.frameTimer += deltaTime;
     }
   }
   draw(context) {
