@@ -6,7 +6,7 @@ export class Player {
     this.width = 100;
     this.height = 91.3;
     this.x = 0;
-    this.y = this.game.height - this.height;
+    this.y = this.game.height - this.height - this.game.groundMargin;
     this.image = document.getElementById("player");
     this.frameX = 0;
     this.frameY = 0;
@@ -82,7 +82,7 @@ export class Player {
   }
 
   onGround() {
-    return this.y >= this.game.height - this.height;
+    return this.y >= this.game.height - this.height - this.game.groundMargin;
   }
 
   setState(state) {
