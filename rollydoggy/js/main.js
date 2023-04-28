@@ -15,7 +15,8 @@ window.addEventListener("load", () => {
     constructor(width, height) {
       this.width = width;
       this.height = height;
-      this.gameSpeed = 3;
+      this.gameSpeed = 0;
+      this.maxSpeed = 3;
       this.groundMargin = 50;
       this.background = new Background(this);
       this.player = new Player(this);
