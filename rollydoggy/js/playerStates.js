@@ -1,4 +1,4 @@
-import { Dust } from "./particles.js";
+import { Dust, Fire } from "./particles.js";
 
 const STATES = {
   SITTING: 0,
@@ -45,13 +45,15 @@ export class Running extends State {
     this.game.player.frameY = 3;
   }
   handleInput(input) {
-    this.game.particles.push(
-      new Dust(
-        this.game,
-        this.game.player.x + this.game.player.width * 0.4,
-        this.game.player.y + this.game.player.height * 0.9
-      )
-    );
+    if (Math.random() < 0.45) {
+      this.game.particles.push(
+        new Dust(
+          this.game,
+          this.game.player.x + this.game.player.width * 0.4,
+          this.game.player.y + this.game.player.height * 0.9
+        )
+      );
+    }
     if (input.includes("KeyS")) {
       this.game.player.setState(STATES.SITTING, 0);
     } else if (input.includes("KeyW")) {
@@ -111,6 +113,16 @@ export class Rolling extends State {
     this.game.player.frameY = 6;
   }
   handleInput(input) {
+    if (Math.random() < 0.45) {
+      this.game.particles.push(
+        new Fire(
+          this.game,
+          this.game.player.x + this.game.player.width * 0.1,
+          this.game.player.y + this.game.player.height * 0.1
+        )
+      );
+    }
+
     if (!input.includes("Space") && this.game.player.onGround()) {
       this.game.player.setState(STATES.RUNNING, 1);
     } else if (!input.includes("Space") && !this.game.player.onGround()) {
