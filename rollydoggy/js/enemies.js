@@ -2,7 +2,7 @@ class Enemy {
   constructor() {
     this.frameX = 0;
     this.frameY = 0;
-    this.fps = 20;
+    this.fps = 30;
     this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
     this.markedForDeletion = false;
@@ -10,7 +10,7 @@ class Enemy {
 
   update(deltaTime) {
     //movement
-    this.x -= this.speedX + this.game.gameSpeed;
+    this.x = Math.floor(this.x - (this.speedX + this.game.gameSpeed));
     this.y += this.speedY;
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
@@ -20,14 +20,13 @@ class Enemy {
         this.frameX = 0;
       }
     } else {
-      this.frameInterval += deltaTime;
+      this.frameTimer += deltaTime;
     }
 
     // marked if removed offscreen
     if (this.x + this.width < 0) {
       this.markedForDeletion = true;
     }
-    this.x = Math.floor(this.x - this.game.gameSpeed);
   }
 
   draw(context) {
