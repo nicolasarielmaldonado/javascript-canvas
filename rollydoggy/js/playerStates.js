@@ -89,6 +89,8 @@ export class Falling extends State {
   handleInput(input) {
     if (this.player.onGround()) {
       this.player.setState(STATES.RUNNING, 1);
+    } else if (!input.includes("Space") && !this.player.onGround()) {
+      this.player.setState(STATES.FALLING, 1);
     }
   }
 }
